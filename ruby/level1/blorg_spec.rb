@@ -17,6 +17,18 @@ describe '#decode' do
   end
 end
 
+describe '#blourg_is_valid?' do
+  it 'returns true if Blourg string is not valid' do
+    expect(Blorg.blourg_is_valid('rgobrhol !')).to be true
+    expect(Blorg.blourg_is_valid(' rhol')).to be true
+  end
+  it 'returns false if Blourg string is not valid' do
+    expect(Blorg.blourg_is_valid('ok rgob')).to be false
+    expect(Blorg.blourg_is_valid('ab cde')).to be false
+    expect(Blorg.blourg_is_valid('a')).to be false
+  end
+end
+
 describe '#get_french_character' do
   it 'returns the French character matching the given Blourg character' do
     expect(Blorg.get_french_character('rlgo')).to eq 'G'
