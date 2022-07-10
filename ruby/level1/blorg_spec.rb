@@ -5,7 +5,12 @@
 
 require_relative 'blorg'
 
-# character translation
+describe '#decode' do
+  it 'translates from Blourg to French' do
+    expect(Blorg.translate('rgbh brug bgou obglobglobgl')).to eq 'a b c ...'
+    expect(Blorg.translate('uhob rgob uhob rgob olgr hrbo 44')).to eq 't o t o d u 44'
+  end
+end
 
 describe '#get_french_character' do
   it 'returns the French character matching the given Blourg character' do
@@ -57,6 +62,3 @@ describe '#translatable?' do
     end
   end
 end
-
-# word translation
-# ...
