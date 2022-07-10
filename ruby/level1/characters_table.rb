@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-@characters_table = {
+TRANSLATION_TABLE = {
   'A' => 'rgbh',
   'B' => 'brug',
   'C' => 'bgou',
@@ -31,4 +31,4 @@
   ',' => 'uohr',
   '.' => 'obgl',
   '?' => 'grlh'
-}
+}.freeze
