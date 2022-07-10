@@ -14,4 +14,10 @@ class Blorg
   def self.get_french_character(blorg_char)
     TRANSLATION_TABLE.select { |_key, value| blorg_char == value }.to_s[2]
   end
+
+  private
+
+  def self.is_translatable?(character)
+    TRANSLATION_TABLE.has_key?(character) || TRANSLATION_TABLE.has_value?(character)
+  end
 end
