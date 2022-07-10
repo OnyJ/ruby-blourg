@@ -12,14 +12,12 @@ require_relative 'characters_table'
 
 class Blorg
   def self.get_french_character(blorg_char)
-    if is_translatable?(blorg_char)
-      TRANSLATION_TABLE.select { |_key, value| blorg_char == value }.to_s[2]
-    end
+    return unless translatable?(blorg_char)
+
+    TRANSLATION_TABLE.select { |_key, value| blorg_char == value }.to_s[2]
   end
 
-  private
-
-  def self.is_translatable?(character)
-    TRANSLATION_TABLE.has_key?(character) || TRANSLATION_TABLE.has_value?(character)
+  def self.translatable?(character)
+    TRANSLATION_TABLE.key?(character) || TRANSLATION_TABLE.value?(character)
   end
 end
