@@ -16,6 +16,15 @@ describe '#get_french_character' do
   end
 end
 
+describe '#get_blourg_character' do
+  it 'returns the Blourg character matching the given French character' do
+    expect(Blorg.get_blourg_character('V')).to eq 'rgub'
+    expect(Blorg.get_blourg_character('Q')).to eq 'lrob'
+    expect(Blorg.get_blourg_character('D')).to eq 'olgr'
+    expect(Blorg.get_blourg_character('?')).to eq 'grlh'
+  end
+end
+
 describe '#translatable?' do
   context 'french character verification' do
     it 'returns true if the TRANSLATION_TABLE contains the key' do
