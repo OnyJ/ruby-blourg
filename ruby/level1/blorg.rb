@@ -17,6 +17,13 @@ class Blorg
     TRANSLATION_TABLE.select { |_key, value| blorg_char == value }.to_s[2]
   end
 
+  def self.get_blourg_character(blorg_char)
+    return unless translatable?(blorg_char)
+
+    equivalent = TRANSLATION_TABLE.select { |key, _value| blorg_char == key }
+    equivalent[blorg_char]
+  end
+
   def self.translatable?(character)
     TRANSLATION_TABLE.key?(character) || TRANSLATION_TABLE.value?(character)
   end
