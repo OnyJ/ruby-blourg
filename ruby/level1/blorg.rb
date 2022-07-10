@@ -7,3 +7,9 @@
 # Il sera exécuté de la façon suivante:
 # ruby blorg.rb encode '...'
 # ruby blorg.rb decode '...'
+
+require_relative 'characters_table'
+
+class Blorg
+  @characters_table
+end
