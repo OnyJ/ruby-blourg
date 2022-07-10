@@ -7,13 +7,13 @@ require_relative 'blorg'
 
 describe '#decode' do
   it 'translates from Blourg to French' do
-    expect(Blorg.translate('rgbh brug bgou obglobglobgl')).to eq 'a b c ...'
-    expect(Blorg.translate('uhob rgob uhob rgob olgr hrbo 44')).to eq 't o t o d u 44'
+    expect(Blorg.decode('rgbh brug bgou obglobglobgl')).to eq 'a b c ...'
+    expect(Blorg.decode('uhob rgob uhob rgob olgr hrbo 44')).to eq 't o t o d u 44'
   end
   it 'rejects invalid Blourg sentences' do
-    expect(Blorg.translate('ok rgob')).to eq 'Invalid Blourg format'
-    expect(Blorg.translate('ab cde')).to eq 'Invalid Blourg format'
-    expect(Blorg.translate('a')).to eq 'Invalid Blourg format'
+    expect(Blorg.decode('ok rgob')).to eq 'Invalid Blourg format'
+    expect(Blorg.decode('ab cde')).to eq 'Invalid Blourg format'
+    expect(Blorg.decode('a')).to eq 'Invalid Blourg format'
   end
 end
 
