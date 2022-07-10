@@ -11,5 +11,7 @@
 require_relative 'characters_table'
 
 class Blorg
-  @characters_table
+  def self.get_french_character(blorg_char)
+    TRANSLATION_TABLE.select { |_key, value| blorg_char == value }.to_s[2]
+  end
 end
