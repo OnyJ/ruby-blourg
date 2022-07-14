@@ -31,6 +31,13 @@ module BlorgValidation
     end
     true
   end
+
+  def self.blourg_is_valid?(blourg_str)
+    blourg_str = blourg_str.downcase
+    return false unless self.translatable?(blourg_str)
+    return false unless self.blourg_char_valid?(blourg_str)
+    true
+  end
 end
 
 module BlorgChar
