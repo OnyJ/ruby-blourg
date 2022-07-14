@@ -91,3 +91,16 @@ describe '#blourg_is_valid?' do
     expect(BlorgValidation.blourg_is_valid?('rgubrgub')).to be false
   end
 end
+
+describe '#blourg_char_valid?' do
+  it 'returns true if Blourg string is valid' do
+    expect(BlorgValidation.blourg_char_valid?('rgob rhol')).to be true
+    expect(BlorgValidation.blourg_char_valid?('  rhol ')).to be true
+  end
+  it 'returns false if Blourg string is not valid' do
+    expect(BlorgValidation.blourg_char_valid?('ok rgob')).to be false
+    expect(BlorgValidation.blourg_char_valid?('ab cde')).to be false
+    expect(BlorgValidation.blourg_char_valid?('a')).to be false
+    expect(BlorgValidation.blourg_char_valid?('rgubrgub')).to be false
+  end
+end
