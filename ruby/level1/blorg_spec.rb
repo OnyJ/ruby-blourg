@@ -17,6 +17,14 @@ describe '#decode' do
   end
 end
 
+describe '#get_blourg_space_positions' do
+  it 'returns an array with blourg sentence double-space positions' do
+    expect(Blorg.get_blourg_space_positions('ab  cd  ')).to eq [2, 6]
+    expect(Blorg.get_blourg_space_positions('ab cd')).to eq []
+    expect(Blorg.get_blourg_space_positions('gbhu  lrug')).to eq [4]
+  end
+end
+
 describe '#char_into_french' do
   it 'returns the French character matching the given Blourg character' do
     expect(BlorgChar.char_into_french('rlgo')).to eq 'G'
