@@ -30,12 +30,12 @@ describe '#blourg_is_valid?' do
   end
 end
 
-describe '#get_french_character' do
+describe '#char_into_french' do
   it 'returns the French character matching the given Blourg character' do
-    expect(Blorg.get_french_character('rlgo')).to eq 'G'
-    expect(Blorg.get_french_character('glhu')).to eq 'N'
-    expect(Blorg.get_french_character('hrbo')).to eq 'U'
-    expect(Blorg.get_french_character('rblg')).to eq '!'
+    expect(Blorg.char_into_french('rlgo')).to eq 'G'
+    expect(Blorg.char_into_french('glhu')).to eq 'N'
+    expect(Blorg.char_into_french('hrbo')).to eq 'U'
+    expect(Blorg.char_into_french('rblg')).to eq '!'
   end
 end
 
