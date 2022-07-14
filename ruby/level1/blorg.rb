@@ -14,6 +14,13 @@ module BlorgValidation
   def self.char_exists?(character)
     TRANSLATION_TABLE.key?(character.upcase) || TRANSLATION_TABLE.value?(character)
   end
+
+  def self.translatable?(sentence)
+    response = sentence.delete(' ').split('').map do |character|
+      char_exists?(character)
+    end
+    !response.include?(false)
+  end
 end
 
 module BlorgChar
