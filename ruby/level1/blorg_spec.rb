@@ -35,35 +35,35 @@ describe '#char_into_blourg' do
   end
 end
 
-describe '#translatable?' do
+describe '#char_exists?' do
   context 'french character verification' do
     it 'returns true if the TRANSLATION_TABLE contains the key' do
-      expect(BlorgValidation.translatable?('J')).to be true
-      expect(BlorgValidation.translatable?('Z')).to be true
-      expect(BlorgValidation.translatable?('E')).to be true
+      expect(BlorgValidation.char_exists?('J')).to be true
+      expect(BlorgValidation.char_exists?('Z')).to be true
+      expect(BlorgValidation.char_exists?('E')).to be true
     end
     it "returns false if the TRANSLATION_TABLE doesn't contain the key" do
-      expect(BlorgValidation.translatable?(')')).to be false
-      expect(BlorgValidation.translatable?('#')).to be false
-      expect(BlorgValidation.translatable?('3')).to be false
-      expect(BlorgValidation.translatable?(' ')).to be false
+      expect(BlorgValidation.char_exists?(')')).to be false
+      expect(BlorgValidation.char_exists?('#')).to be false
+      expect(BlorgValidation.char_exists?('3')).to be false
+      expect(BlorgValidation.char_exists?(' ')).to be false
     end
   end
 end
 
-describe '#translatable?' do
+describe '#char_exists?' do
   context 'blourg character verification' do
     it 'returns true if the TRANSLATION_TABLE contains the value' do
-      expect(BlorgValidation.translatable?('olgr')).to be true
-      expect(BlorgValidation.translatable?('rhol')).to be true
-      expect(BlorgValidation.translatable?('uhog')).to be true
+      expect(BlorgValidation.char_exists?('olgr')).to be true
+      expect(BlorgValidation.char_exists?('rhol')).to be true
+      expect(BlorgValidation.char_exists?('uhog')).to be true
     end
     it "returns false if the TRANSLATION_TABLE doesn't contain the value" do
-      expect(BlorgValidation.translatable?(' ')).to be false
-      expect(BlorgValidation.translatable?('xxxx')).to be false
-      expect(BlorgValidation.translatable?('po')).to be false
-      expect(BlorgValidation.translatable?('12-c')).to be false
-      expect(BlorgValidation.translatable?('1234')).to be false
+      expect(BlorgValidation.char_exists?(' ')).to be false
+      expect(BlorgValidation.char_exists?('xxxx')).to be false
+      expect(BlorgValidation.char_exists?('po')).to be false
+      expect(BlorgValidation.char_exists?('12-c')).to be false
+      expect(BlorgValidation.char_exists?('1234')).to be false
     end
   end
 end
