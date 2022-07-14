@@ -19,13 +19,14 @@ end
 
 describe '#blourg_is_valid?' do
   it 'returns true if Blourg string is valid' do
-    expect(Blorg.blourg_is_valid?('rgobrhol !')).to be true
-    expect(Blorg.blourg_is_valid?(' rhol')).to be true
+    expect(Blorg.blourg_is_valid?('rgob rhol')).to be true
+    expect(Blorg.blourg_is_valid?('  rhol ')).to be true
   end
   it 'returns false if Blourg string is not valid' do
     expect(Blorg.blourg_is_valid?('ok rgob')).to be false
     expect(Blorg.blourg_is_valid?('ab cde')).to be false
     expect(Blorg.blourg_is_valid?('a')).to be false
+    expect(Blorg.blourg_is_valid?('rgubrgub')).to be false
   end
 end
 
