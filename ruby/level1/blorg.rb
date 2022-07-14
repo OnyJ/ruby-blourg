@@ -10,21 +10,26 @@
 
 require_relative 'characters_table'
 
-class Blorg
-  def self.char_into_french(blourg_char)
-    return unless translatable?(blourg_char)
+module BlorgValidation
+  def self.char_exists?(character)
+    TRANSLATION_TABLE.key?(character) || TRANSLATION_TABLE.value?(character)
+  end
+end
 
+module BlorgChar
+  include BlorgValidation
+
+  def self.char_into_french(blourg_char)
     TRANSLATION_TABLE.select { |_key, value| blourg_char == value }.to_s[2]
   end
 
-  def self.char_into_blourg(blourg_char)
-    return unless translatable?(blourg_char)
-
-    equivalent = TRANSLATION_TABLE.select { |key, _value| blourg_char == key }
-    equivalent[blourg_char]
+  def self.char_into_blourg(french_char)
+    equivalent = TRANSLATION_TABLE.select { |key, _value| french_char == key }
+    equivalent[french_char]
   end
+end
 
-  def self.translatable?(character)
-    TRANSLATION_TABLE.key?(character) || TRANSLATION_TABLE.value?(character)
-  end
+class Blorg
+  include BlorgValidation
+  include BlorgChar
 end
