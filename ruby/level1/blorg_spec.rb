@@ -32,19 +32,19 @@ end
 
 describe '#char_into_french' do
   it 'returns the French character matching the given Blourg character' do
-    expect(Blorg.char_into_french('rlgo')).to eq 'G'
-    expect(Blorg.char_into_french('glhu')).to eq 'N'
-    expect(Blorg.char_into_french('hrbo')).to eq 'U'
-    expect(Blorg.char_into_french('rblg')).to eq '!'
+    expect(BlorgChar.char_into_french('rlgo')).to eq 'G'
+    expect(BlorgChar.char_into_french('glhu')).to eq 'N'
+    expect(BlorgChar.char_into_french('hrbo')).to eq 'U'
+    expect(BlorgChar.char_into_french('rblg')).to eq '!'
   end
 end
 
 describe '#char_into_blourg' do
   it 'returns the Blourg character matching the given French character' do
-    expect(Blorg.char_into_blourg('V')).to eq 'rgub'
-    expect(Blorg.char_into_blourg('Q')).to eq 'lrob'
-    expect(Blorg.char_into_blourg('D')).to eq 'olgr'
-    expect(Blorg.char_into_blourg('?')).to eq 'grlh'
+    expect(BlorgChar.char_into_blourg('V')).to eq 'rgub'
+    expect(BlorgChar.char_into_blourg('Q')).to eq 'lrob'
+    expect(BlorgChar.char_into_blourg('D')).to eq 'olgr'
+    expect(BlorgChar.char_into_blourg('?')).to eq 'grlh'
   end
 end
 
