@@ -16,7 +16,7 @@ module BlorgValidation
   end
 
   def self.translatable?(sentence)
-    response = sentence.delete(' ').split('').map do |character|
+    response = sentence.delete(' ').chars.map do |character|
       char_exists?(character)
     end
     !response.include?(false)
