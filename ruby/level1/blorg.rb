@@ -25,9 +25,7 @@ module BlorgValidation
   def self.blourg_char_valid?(blourg_str)
     letters = blourg_str.split
     letters.each do |letter|
-      if letter.length != 4
-        return false
-      end
+      return false if letter.length != 4
     end
     true
   end
