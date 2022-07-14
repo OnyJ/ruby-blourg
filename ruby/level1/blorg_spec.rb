@@ -68,6 +68,17 @@ describe '#char_exists?' do
   end
 end
 
+describe '#translatable?' do
+  it 'returns true if the sentence contains only TRANSLATION_TABLE characters' do
+    expect(BlorgValidation.translatable?('olgr rhol  ')).to be true
+    expect(BlorgValidation.translatable?('  abcde')).to be true
+  end
+  it 'returns false if the sentence contains only TRANSLATION_TABLE characters' do
+    expect(BlorgValidation.translatable?('olgr rhol#{!')).to be false
+    expect(BlorgValidation.translatable?('ça')).to be false
+  end
+end
+
 describe '#blourg_is_valid?' do
   it 'returns true if Blourg string is valid' do
     expect(BlorgValidation.blourg_is_valid?('rgob rhol')).to be true
