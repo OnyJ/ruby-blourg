@@ -23,7 +23,7 @@ module BlorgValidation
   end
 
   def self.blourg_char_valid?(blourg_str)
-    letters = blourg_str.split(' ')
+    letters = blourg_str.split
     letters.each do |letter|
       if letter.length != 4
         return false
