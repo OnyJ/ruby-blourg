@@ -12,7 +12,7 @@ require_relative 'characters_table'
 
 module BlorgValidation
   def self.char_exists?(character)
-    TRANSLATION_TABLE.key?(character) || TRANSLATION_TABLE.value?(character)
+    TRANSLATION_TABLE.key?(character.upcase) || TRANSLATION_TABLE.value?(character)
   end
 end
 
