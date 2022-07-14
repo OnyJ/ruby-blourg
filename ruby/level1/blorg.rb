@@ -55,4 +55,10 @@ end
 class Blorg
   include BlorgValidation
   include BlorgChar
+
+  def self.get_blourg_space_positions(str)
+    (0 ... str.length).find_all do |i|
+      str[i] == ' ' && str[i+1] == ' '
+    end
+  end
 end
