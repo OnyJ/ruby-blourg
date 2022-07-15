@@ -25,7 +25,14 @@ module BlorgValidation
   def self.blourg_char_valid?(blourg_str)
     letters = blourg_str.split
     letters.each do |letter|
-      return false if letter.length != 4
+      if letter.length != 4
+        puts 'Error: Each Blourg letter must be 4 characters long.'
+        return false
+      end
+      if !char_exists?(letter)
+        puts 'Error: One or multiple Blourg letter doesn\'t exist.'
+        return false
+      end
     end
     true
   end
