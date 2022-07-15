@@ -29,7 +29,7 @@ module BlorgValidation
         puts 'Error: Each Blourg letter must be 4 characters long.'
         return false
       end
-      if !char_exists?(letter)
+      unless char_exists?(letter)
         puts 'Error: One or multiple Blourg letter doesn\'t exist.'
         return false
       end
@@ -62,4 +62,38 @@ end
 class Blorg
   include BlorgValidation
   include BlorgChar
+
+  @error = 'Invalid Blourg format'
+
+  def self.decode(str)
+    str = str.downcase
+
+    if BlorgValidation.blourg_is_valid?(str) == false
+      puts @error
+      return @error
+    end
+
+    # code for str_into_french(str) :
+
+    french = ''
+    str.split.each do |blourg|
+      french += BlorgChar.char_into_french(blourg)
+    end
+
+    # code to insert spaces :
+
+    space_positions = []
+    words = str.split('  ')
+    for i in 0..words.count - 1 do
+      spacement = (words[i].length / 4) + i + (1 * i)
+      space_positions.push(spacement)
+    end
+
+    # spaces exceptions (at start and at the end)
+    french.insert(french.length, ' ') if str[str.length - 2] == ' ' && str[str.length - 2] == ' '
+    space_positions.pop
+    space_positions.each { |i| french.insert(i, ' ') }
+
+    french.downcase
+  end
 end
