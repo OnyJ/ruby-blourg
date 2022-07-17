@@ -9,10 +9,16 @@
 # ruby blorg.rb decode '...'
 
 require_relative 'characters_table'
+INVALID_BLOURG = 'Invalid Blourg format'
 
 module BlorgValidation
   def self.char_exists?(character)
     TRANSLATION_TABLE.key?(character.upcase) || TRANSLATION_TABLE.value?(character)
+  end
+
+  def self.say_invalid_blourg
+    puts INVALID_BLOURG
+    return false
   end
 
   def self.translatable?(sentence)
@@ -39,8 +45,8 @@ module BlorgValidation
 
   def self.blourg_is_valid?(blourg_str)
     blourg_str = blourg_str.downcase
-    return false unless translatable?(blourg_str)
-    return false unless blourg_char_valid?(blourg_str)
+    return say_invalid_blourg unless translatable?(blourg_str)
+    return say_invalid_blourg unless blourg_char_valid?(blourg_str)
 
     true
   end
@@ -63,15 +69,10 @@ class Blorg
   include BlorgValidation
   include BlorgChar
 
-  @error = 'Invalid Blourg format'
-
   def self.decode(str)
     str = str.downcase
 
-    if BlorgValidation.blourg_is_valid?(str) == false
-      puts @error
-      return @error
-    end
+    return INVALID_BLOURG unless BlorgValidation.blourg_is_valid?(str)
 
     # code for str_into_french(str) :
 
