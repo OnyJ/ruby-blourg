@@ -5,6 +5,19 @@
 
 require_relative 'blorg'
 
+describe '#encode' do
+  it 'translates from French to Blourg' do
+    expect(Blorg.encode('a b c ...')).to eq 'rgbh  brug  bgou  obgl obgl obgl'
+    expect(Blorg.encode('toto mange')).to eq 'uhob rgob uhob rgob  uhog rgbh glhu rlgo lorh'
+    expect(Blorg.encode(' tot ')).to eq '  uhob rgob uhob  '
+  end
+  it 'rejects invalid French sentences' do
+    expect(Blorg.encode('###')).to eq 'Invalid Blourg format'
+    expect(Blorg.encode('où ça')).to eq 'Invalid Blourg format'
+    expect(Blorg.encode('1234')).to eq 'Invalid Blourg format'
+  end
+end
+
 describe '#decode' do
   it 'translates from Blourg to French' do
     expect(Blorg.decode('rgbh  brug  bgou  obgl obgl obgl')).to eq 'a b c ...'
