@@ -74,27 +74,32 @@ class Blorg
     french
   end
 
-  def self.decode(str)
-    str = str.downcase
-
-    return INVALID_BLOURG unless BlorgValidation.blourg_is_valid?(str)
-
-    french = string_into_french(str)
-
-    # code to insert spaces :
-
+  def self.get_space_positions(str)
     space_positions = []
     words = str.split('  ')
     for i in 0..words.count - 1 do
       spacement = (words[i].length / 4) + i + (1 * i)
       space_positions.push(spacement)
     end
+    space_positions
+  end
+  
+  def self.insert_spaces(str, french)
+    space_positions = get_space_positions(str)
 
-    # spaces exceptions (at start and at the end)
+    # handle space exceptions (space at end of string)
     french.insert(french.length, ' ') if str[str.length - 1] == ' ' && str[str.length - 2] == ' '
     space_positions.pop
     space_positions.each { |pos| french.insert(pos, ' ') }
+    french
+  end
+  
+  def self.decode(str)
+    str = str.downcase
+    return INVALID_BLOURG unless BlorgValidation.blourg_is_valid?(str)
 
+    french = string_into_french(str)
+    french = insert_spaces(str, french)
     french.downcase
   end
 end
