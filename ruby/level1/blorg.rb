@@ -16,8 +16,8 @@ module BlorgValidation
     TRANSLATION_TABLE.key?(character.upcase) || TRANSLATION_TABLE.value?(character)
   end
 
-  def self.say_invalid_blourg
-    puts INVALID_BLOURG
+  def self.return_error(error)
+    puts error
     return false
   end
 
@@ -45,8 +45,8 @@ module BlorgValidation
 
   def self.blourg_is_valid?(blourg_str)
     blourg_str = blourg_str.downcase
-    return say_invalid_blourg unless translatable?(blourg_str)
-    return say_invalid_blourg unless blourg_char_valid?(blourg_str)
+    return return_error(INVALID_BLOURG) unless translatable?(blourg_str)
+    return return_error(INVALID_BLOURG) unless blourg_char_valid?(blourg_str)
 
     true
   end
