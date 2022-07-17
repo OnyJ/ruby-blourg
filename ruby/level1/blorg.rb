@@ -12,6 +12,9 @@ require_relative 'characters_table'
 INVALID_BLOURG = 'Invalid Blourg format'
 
 module BlorgValidation
+  @blourg_length_error = 'Error: Each Blourg letter must be 4 characters long.'
+  @blourg_unknown_error = 'Error: One or multiple Blourg letter doesn\'t exist.'
+
   def self.char_exists?(character)
     TRANSLATION_TABLE.key?(character.upcase) || TRANSLATION_TABLE.value?(character)
   end
@@ -31,14 +34,8 @@ module BlorgValidation
   def self.blourg_char_valid?(blourg_str)
     letters = blourg_str.split
     letters.each do |letter|
-      if letter.length != 4
-        puts 'Error: Each Blourg letter must be 4 characters long.'
-        return false
-      end
-      unless char_exists?(letter)
-        puts 'Error: One or multiple Blourg letter doesn\'t exist.'
-        return false
-      end
+      return return_error(@blourg_length_error) unless letter.length != 4
+      return return_error(@blourg_unknown_error) unless char_exists?(letter)
     end
     true
   end
