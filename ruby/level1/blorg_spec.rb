@@ -18,6 +18,13 @@ describe '#decode' do
   end
 end
 
+describe '#string_into_french' do
+  it 'translates blourg characters into french characters' do
+    expect(Blorg.string_into_french('uhob rgob uhob rgob  uhog rgbh glhu rlgo lorh')).to eq 'TOTOMANGE'
+    expect(Blorg.string_into_french('rgbh  brug  bgou  obgl obgl obgl')).to eq 'ABC...'
+  end
+end
+
 describe '#char_into_french' do
   it 'returns the French character matching the given Blourg character' do
     expect(BlorgChar.char_into_french('rlgo')).to eq 'G'
