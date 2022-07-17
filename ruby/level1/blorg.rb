@@ -91,9 +91,9 @@ class Blorg
     end
 
     # spaces exceptions (at start and at the end)
-    french.insert(french.length, ' ') if str[str.length - 2] == ' ' && str[str.length - 2] == ' '
+    french.insert(french.length, ' ') if str[str.length - 1] == ' ' && str[str.length - 2] == ' '
     space_positions.pop
-    space_positions.each { |i| french.insert(i, ' ') }
+    space_positions.each { |pos| french.insert(pos, ' ') }
 
     french.downcase
   end
