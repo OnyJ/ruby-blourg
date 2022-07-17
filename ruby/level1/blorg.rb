@@ -21,7 +21,7 @@ module BlorgValidation
 
   def self.return_error(error)
     puts error
-    return false
+    false
   end
 
   def self.translatable?(sentence)
@@ -99,7 +99,7 @@ class Blorg
     space_positions.each { |pos| french.insert(pos, ' ') }
     french
   end
-  
+
   def self.decode(str)
     str = str.downcase
     return INVALID_BLOURG unless BlorgValidation.blourg_is_valid?(str)
