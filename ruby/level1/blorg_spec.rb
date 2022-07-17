@@ -25,6 +25,13 @@ describe '#string_into_french' do
   end
 end
 
+describe '#insert_spaces' do
+  it 'inserts the right spaces inside the french string' do
+    expect(Blorg.insert_spaces('rgbh  brug  bgou  obgl obgl obgl', 'ABC...'.dup)).to eq 'A B C ...'
+    expect(Blorg.insert_spaces('uhob rgob uhob rgob  uhog rgbh glhu rlgo lorh', 'TOTOMANGE'.dup)).to eq 'TOTO MANGE'
+  end
+end
+
 describe '#char_into_french' do
   it 'returns the French character matching the given Blourg character' do
     expect(BlorgChar.char_into_french('rlgo')).to eq 'G'
