@@ -66,17 +66,20 @@ class Blorg
   include BlorgValidation
   include BlorgChar
 
+  def self.string_into_french(str)
+    french = ''
+    str.split.each do |blourg|
+      french += BlorgChar.char_into_french(blourg)
+    end
+    french
+  end
+
   def self.decode(str)
     str = str.downcase
 
     return INVALID_BLOURG unless BlorgValidation.blourg_is_valid?(str)
 
-    # code for str_into_french(str) :
-
-    french = ''
-    str.split.each do |blourg|
-      french += BlorgChar.char_into_french(blourg)
-    end
+    french = string_into_french(str)
 
     # code to insert spaces :
 
