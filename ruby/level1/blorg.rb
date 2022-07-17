@@ -34,7 +34,7 @@ module BlorgValidation
   def self.blourg_char_valid?(blourg_str)
     letters = blourg_str.split
     letters.each do |letter|
-      return return_error(@blourg_length_error) unless letter.length != 4
+      return return_error(@blourg_length_error) unless letter.length == 4
       return return_error(@blourg_unknown_error) unless char_exists?(letter)
     end
     true
