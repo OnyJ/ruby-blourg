@@ -83,13 +83,19 @@ class Blorg
     end
     space_positions
   end
-  
-  def self.insert_spaces(str, french)
-    space_positions = get_space_positions(str)
 
-    # handle space exceptions (space at end of string)
-    french.insert(french.length, ' ') if str[str.length - 1] == ' ' && str[str.length - 2] == ' '
+  def self.insert_exceptionnal_space(str, french)
+    end_contains_space = str[str.length - 1] == ' ' && str[str.length - 2] == ' '
+    french.insert(french.length, ' ') if end_contains_space
+    french
+  end
+  
+  def self.insert_spaces(str, french_without_spaces)
+    french = french_without_spaces
+    space_positions = get_space_positions(str)
     space_positions.pop
+
+    french = insert_exceptionnal_space(str, french)
     space_positions.each { |pos| french.insert(pos, ' ') }
     french
   end
