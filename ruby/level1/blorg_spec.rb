@@ -25,6 +25,13 @@ describe '#string_into_french' do
   end
 end
 
+describe '#insert_exceptionnal_space' do
+  it 'appends a space to french string if blourg string ends with 2 spaces' do
+    expect(Blorg.insert_exceptionnal_space('ghob ghob  ', 'ii'.dup)).to eq 'ii '
+    expect(Blorg.insert_exceptionnal_space('burh burh ', 'hh'.dup)).to eq 'hh'
+  end
+end
+
 describe '#insert_spaces' do
   it 'inserts the right spaces inside the french string' do
     expect(Blorg.insert_spaces('rgbh  brug  bgou  obgl obgl obgl', 'ABC...'.dup)).to eq 'A B C ...'
