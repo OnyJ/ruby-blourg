@@ -77,7 +77,7 @@ class Blorg
   def self.get_space_positions(str)
     space_positions = []
     words = str.split('  ')
-    for i in 0..words.count - 1 do
+    (0..words.count - 1).each do |i|
       spacement = (words[i].length / 4) + i + (1 * i)
       space_positions.push(spacement)
     end
@@ -89,7 +89,7 @@ class Blorg
     french.insert(french.length, ' ') if end_contains_space
     french
   end
-  
+
   def self.insert_spaces(str, french_without_spaces)
     french = french_without_spaces
     space_positions = get_space_positions(str)
