@@ -12,9 +12,9 @@ describe '#encode' do
     expect(Blorg.encode(' tot ')).to eq '  uhob rgob uhob  '
   end
   it 'rejects invalid French sentences' do
-    expect(Blorg.encode('###')).to eq 'Invalid Blourg format'
-    expect(Blorg.encode('où ça')).to eq 'Invalid Blourg format'
-    expect(Blorg.encode('1234')).to eq 'Invalid Blourg format'
+    expect(Blorg.encode('###')).to eq 'Invalid French format'
+    expect(Blorg.encode('où ça')).to eq 'Invalid French format'
+    expect(Blorg.encode('1234')).to eq 'Invalid French format'
   end
 end
 
