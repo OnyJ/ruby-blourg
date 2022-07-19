@@ -52,10 +52,10 @@ describe '#insert_exceptionnal_blourg_space' do
   end
 end
 
-describe '#insert_spaces' do
+describe '#insert_spaces_into_french' do
   it 'inserts the right spaces inside the french string' do
-    expect(Blorg.insert_spaces('rgbh  brug  bgou  obgl obgl obgl', 'ABC...'.dup)).to eq 'A B C ...'
-    expect(Blorg.insert_spaces('uhob rgob uhob rgob  uhog rgbh glhu rlgo lorh', 'TOTOMANGE'.dup)).to eq 'TOTO MANGE'
+    expect(Blorg.insert_spaces_into_french('rgbh  brug  bgou  obgl obgl obgl', 'ABC...'.dup)).to eq 'A B C ...'
+    expect(Blorg.insert_spaces_into_french('uhob rgob uhob rgob  uhog rgbh glhu rlgo lorh', 'TOTOMANGE'.dup)).to eq 'TOTO MANGE'
   end
 end
 
