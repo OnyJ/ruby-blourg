@@ -80,11 +80,7 @@ module BlorgString
   end
 end
 
-class Blorg
-  include BlorgValidation
-  include BlorgChar
-  include BlorgString
-
+module BlorgDecode
   def self.get_blourg_space_positions(str)
     space_positions = []
     words = str.split('  ')
@@ -93,17 +89,6 @@ class Blorg
       space_positions.push(spacement)
     end
     space_positions
-  end
-
-  def self.get_french_space_positions(str)
-    # space_positions = []
-    # words = str.split('')
-    # (0..words.count - 1).each do |i|
-    #   # spacement = (words[i]+ i)
-    #   space_positions.push(i) if words[i] == ' '
-    # end
-    # puts space_positions
-    # space_positions
   end
 
   def self.insert_exceptionnal_blourg_space(str, french)
@@ -121,16 +106,40 @@ class Blorg
     space_positions.each { |pos| french.insert(pos, ' ') }
     french
   end
+end
+
+module BlorgEncode
+
+end
+
+class Blorg
+  include BlorgValidation
+  include BlorgChar
+  include BlorgString
+
+
+  def self.get_french_space_positions(str)
+    space_positions = []
+    words = str.split('')
+    (0..words.count - 1).each do |i|
+      # spacement = (words[i]+ i)
+      space_positions.push(i) if words[i] == ' '
+    end
+    puts "space_positions : " + space_positions
+    space_positions
+  end
+
+
 
   def self.insert_spaces_into_blourg(str, blourg_without_double_spaces)
-    # puts "okok"
-    # blourg = blourg_without_double_spaces
-    # space_positions = get_french_space_positions(str)
-    # # space_positions.pop
+    puts "okok"
+    blourg = blourg_without_double_spaces
+    space_positions = get_french_space_positions(str)
+    # space_positions.pop
 
-    # space_positions.each { |pos| blourg.insert(pos, ' ')}
-    # puts blourg
-    # blourg
+    space_positions.each { |pos| blourg.insert(pos, ' ')}
+    puts blourg
+    blourg
   end
 
   def self.decode(str)
@@ -138,7 +147,7 @@ class Blorg
     return INVALID_BLOURG unless BlorgValidation.blourg_string_valid?(str)
 
     french = BlorgString.string_into_french(str)
-    french = insert_spaces_into_french(str, french)
+    french = BlorgDecode.insert_spaces_into_french(str, french)
     french.downcase
   end
 
@@ -149,7 +158,7 @@ class Blorg
     blorg = ''
 
     blorg = BlorgString.string_into_blourg(str)
-    # blorg = insert_spaces_into_blourg(str, blorg)
+    blorg = insert_spaces_into_blourg(str, blorg)
     blorg
   end
 end
