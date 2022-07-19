@@ -62,92 +62,27 @@ module BlorgChar
   end
 end
 
-module BlorgString
-  def self.string_into_french(str)
-    french = ''
-    str.split.each do |blourg_char|
-      french += BlorgChar.char_into_french(blourg_char)
-    end
-    french
-  end
-
-  def self.string_into_blourg(str)
-    blourg = ''
-    str.split('').each do |french_char|
-      blourg += BlorgChar.char_into_blourg(french_char).to_s + ' '
-    end
-    blourg[0..(blourg.length - 2)]
-  end
-end
-
-module BlorgDecode
-  def self.get_blourg_space_positions(str)
-    space_positions = []
-    words = str.split('  ')
-    (0..words.count - 1).each do |i|
-      spacement = (words[i].length / 4) + i + (1 * i)
-      space_positions.push(spacement)
-    end
-    space_positions
-  end
-
-  def self.insert_exceptionnal_blourg_space(str, french)
-    end_contains_space = str[str.length - 1] == ' ' && str[str.length - 2] == ' '
-    french.insert(french.length, ' ') if end_contains_space
-    french
-  end
-
-  def self.insert_spaces_into_french(str, french_without_spaces)
-    french = french_without_spaces
-    space_positions = get_blourg_space_positions(str)
-    space_positions.pop
-
-    french = insert_exceptionnal_blourg_space(str, french)
-    space_positions.each { |pos| french.insert(pos, ' ') }
-    french
-  end
-end
-
-module BlorgEncode
-
-end
-
 class Blorg
   include BlorgValidation
   include BlorgChar
-  include BlorgString
-
-
-  def self.get_french_space_positions(str)
-    space_positions = []
-    words = str.split('')
-    (0..words.count - 1).each do |i|
-      # spacement = (words[i]+ i)
-      space_positions.push(i) if words[i] == ' '
-    end
-    puts "space_positions : " + space_positions
-    space_positions
-  end
-
-
-
-  def self.insert_spaces_into_blourg(str, blourg_without_double_spaces)
-    puts "okok"
-    blourg = blourg_without_double_spaces
-    space_positions = get_french_space_positions(str)
-    # space_positions.pop
-
-    space_positions.each { |pos| blourg.insert(pos, ' ')}
-    puts blourg
-    blourg
-  end
 
   def self.decode(str)
     str = str.downcase
     return INVALID_BLOURG unless BlorgValidation.blourg_string_valid?(str)
 
-    french = BlorgString.string_into_french(str)
-    french = BlorgDecode.insert_spaces_into_french(str, french)
+    french = ''
+    last = str.length - 1
+    ends_with_space = str[last] == ' ' && str[last - 1] == ' '
+
+    str.split(/ /).each do |blourg_char|
+      french += if blourg_char == ''
+                  ' '
+                else
+                  BlorgChar.char_into_french(blourg_char)
+                end
+    end
+    french += ' ' if ends_with_space
+    french = french[1...] if french[0..1] == '  '
     french.downcase
   end
 
@@ -155,10 +90,20 @@ class Blorg
     str = str.upcase
     return INVALID_FRENCH unless BlorgValidation.translatable?(str)
 
-    blorg = ''
+    blourg = ''
+    i = 0
+    last = str.length - 1
+    ends_with_space = str[last] == ' '
 
-    blorg = BlorgString.string_into_blourg(str)
-    blorg = insert_spaces_into_blourg(str, blorg)
-    blorg
+    str.split(//).each do |french_char|
+      blourg += BlorgChar.char_into_blourg(french_char).to_s + ' '
+      if french_char == ' '
+        blourg += ' '
+      end
+      i+=1
+    end
+    blourg += ' ' if ends_with_space
+    blourg.gsub!('   ', '  ')
+    blourg[0..(blourg.length - 2)]
   end
 end
