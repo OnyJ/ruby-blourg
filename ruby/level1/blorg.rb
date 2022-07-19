@@ -67,13 +67,13 @@ class Blorg
 
   def self.string_into_french(str)
     french = ''
-    str.split.each do |blourg|
-      french += BlorgChar.char_into_french(blourg)
+    str.split.each do |blourg_char|
+      french += BlorgChar.char_into_french(blourg_char)
     end
     french
   end
 
-  def self.get_space_positions(str)
+  def self.get_blourg_space_positions(str)
     space_positions = []
     words = str.split('  ')
     (0..words.count - 1).each do |i|
@@ -83,7 +83,7 @@ class Blorg
     space_positions
   end
 
-  def self.insert_exceptionnal_space(str, french)
+  def self.insert_exceptionnal_blourg_space(str, french)
     end_contains_space = str[str.length - 1] == ' ' && str[str.length - 2] == ' '
     french.insert(french.length, ' ') if end_contains_space
     french
@@ -91,10 +91,10 @@ class Blorg
 
   def self.insert_spaces(str, french_without_spaces)
     french = french_without_spaces
-    space_positions = get_space_positions(str)
+    space_positions = get_blourg_space_positions(str)
     space_positions.pop
 
-    french = insert_exceptionnal_space(str, french)
+    french = insert_exceptionnal_blourg_space(str, french)
     space_positions.each { |pos| french.insert(pos, ' ') }
     french
   end
