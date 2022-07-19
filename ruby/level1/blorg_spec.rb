@@ -38,6 +38,13 @@ describe '#string_into_french' do
   end
 end
 
+describe '#string_into_blourg' do
+  it 'translates french characters into blourg characters' do
+    expect(Blorg.string_into_blourg('TOTO MANGE')).to eq 'uhob rgob uhob rgob  uhog rgbh glhu rlgo lorh'
+    expect(Blorg.string_into_blourg('A B C ...')).to eq 'rgbh  brug  bgou  obgl obgl obgl'
+  end
+end
+
 describe '#insert_exceptionnal_blourg_space' do
   it 'appends a space to french string if blourg string ends with 2 spaces' do
     expect(Blorg.insert_exceptionnal_blourg_space('ghob ghob  ', 'ii'.dup)).to eq 'ii '
