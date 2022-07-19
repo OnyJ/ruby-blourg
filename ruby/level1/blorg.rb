@@ -62,10 +62,7 @@ module BlorgChar
   end
 end
 
-class Blorg
-  include BlorgValidation
-  include BlorgChar
-
+module BlorgString
   def self.string_into_french(str)
     french = ''
     str.split.each do |blourg_char|
@@ -81,6 +78,12 @@ class Blorg
     end
     blourg[0..(blourg.length - 2)]
   end
+end
+
+class Blorg
+  include BlorgValidation
+  include BlorgChar
+  include BlorgString
 
   def self.get_blourg_space_positions(str)
     space_positions = []
@@ -134,7 +137,7 @@ class Blorg
     str = str.downcase
     return INVALID_BLOURG unless BlorgValidation.blourg_string_valid?(str)
 
-    french = string_into_french(str)
+    french = BlorgString.string_into_french(str)
     french = insert_spaces_into_french(str, french)
     french.downcase
   end
@@ -145,7 +148,7 @@ class Blorg
 
     blorg = ''
 
-    blorg = string_into_blourg(str)
+    blorg = BlorgString.string_into_blourg(str)
     # blorg = insert_spaces_into_blourg(str, blorg)
     blorg
   end

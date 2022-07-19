@@ -31,20 +31,6 @@ describe '#decode' do
   end
 end
 
-describe '#string_into_french' do
-  it 'translates blourg characters into french characters' do
-    expect(Blorg.string_into_french('uhob rgob uhob rgob  uhog rgbh glhu rlgo lorh')).to eq 'TOTOMANGE'
-    expect(Blorg.string_into_french('rgbh  brug  bgou  obgl obgl obgl')).to eq 'ABC...'
-  end
-end
-
-describe '#string_into_blourg' do
-  it 'translates french characters into blourg characters' do
-    expect(Blorg.string_into_blourg('TOTO MANGE')).to eq 'uhob rgob uhob rgob  uhog rgbh glhu rlgo lorh'
-    expect(Blorg.string_into_blourg('A B C ...')).to eq 'rgbh  brug  bgou  obgl obgl obgl'
-  end
-end
-
 describe '#insert_exceptionnal_blourg_space' do
   it 'appends a space to french string if blourg string ends with 2 spaces' do
     expect(Blorg.insert_exceptionnal_blourg_space('ghob ghob  ', 'ii'.dup)).to eq 'ii '
@@ -63,6 +49,20 @@ describe '#insert_spaces_into_blourg' do
   it 'inserts the right spaces inside the blourg string' do
     expect(Blorg.insert_spaces_into_french('toto mange', 'uhob rgob uhob rgob uhog rgbh glhu rlgo lorh'.dup)).to eq 'uhob rgob uhob rgob  uhog rgbh glhu rlgo lorh'
     expect(Blorg.insert_spaces_into_french('a b c ...', 'rgbh brug bgou obgl obgl obgl'.dup)).to eq 'rgbh  brug  bgou  obgl obgl obgl'
+  end
+end
+
+describe '#string_into_french' do
+  it 'translates blourg characters into french characters' do
+    expect(BlorgString.string_into_french('uhob rgob uhob rgob  uhog rgbh glhu rlgo lorh')).to eq 'TOTOMANGE'
+    expect(BlorgString.string_into_french('rgbh  brug  bgou  obgl obgl obgl')).to eq 'ABC...'
+  end
+end
+
+describe '#string_into_blourg' do
+  it 'translates french characters into blourg characters' do
+    expect(BlorgString.string_into_blourg('TOTO MANGE')).to eq 'uhob rgob uhob rgob  uhog rgbh glhu rlgo lorh'
+    expect(BlorgString.string_into_blourg('A B C ...')).to eq 'rgbh  brug  bgou  obgl obgl obgl'
   end
 end
 
