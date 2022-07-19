@@ -10,6 +10,7 @@
 
 require_relative 'characters_table'
 INVALID_BLOURG = 'Invalid Blourg format'
+INVALID_FRENCH = 'Invalid French format'
 
 module BlorgValidation
   @blourg_length_error = 'Error: Each Blourg letter must be 4 characters long.'
@@ -91,13 +92,24 @@ class Blorg
     space_positions
   end
 
+  def self.get_french_space_positions(str)
+    # space_positions = []
+    # words = str.split('')
+    # (0..words.count - 1).each do |i|
+    #   # spacement = (words[i]+ i)
+    #   space_positions.push(i) if words[i] == ' '
+    # end
+    # puts space_positions
+    # space_positions
+  end
+
   def self.insert_exceptionnal_blourg_space(str, french)
     end_contains_space = str[str.length - 1] == ' ' && str[str.length - 2] == ' '
     french.insert(french.length, ' ') if end_contains_space
     french
   end
 
-  def self.insert_spaces(str, french_without_spaces)
+  def self.insert_spaces_into_french(str, french_without_spaces)
     french = french_without_spaces
     space_positions = get_blourg_space_positions(str)
     space_positions.pop
@@ -107,12 +119,34 @@ class Blorg
     french
   end
 
+  def self.insert_spaces_into_blourg(str, blourg_without_double_spaces)
+    # puts "okok"
+    # blourg = blourg_without_double_spaces
+    # space_positions = get_french_space_positions(str)
+    # # space_positions.pop
+
+    # space_positions.each { |pos| blourg.insert(pos, ' ')}
+    # puts blourg
+    # blourg
+  end
+
   def self.decode(str)
     str = str.downcase
     return INVALID_BLOURG unless BlorgValidation.blourg_is_valid?(str)
 
     french = string_into_french(str)
-    french = insert_spaces(str, french)
+    french = insert_spaces_into_french(str, french)
     french.downcase
+  end
+
+  def self.encode(str)
+    str = str.upcase
+    return INVALID_FRENCH unless BlorgValidation.translatable?(str)
+
+    blorg = ''
+
+    blorg = string_into_blourg(str)
+    # blorg = insert_spaces_into_blourg(str, blorg)
+    blorg
   end
 end
