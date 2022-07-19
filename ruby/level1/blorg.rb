@@ -73,6 +73,14 @@ class Blorg
     french
   end
 
+  def self.string_into_blourg(str)
+    blourg = ''
+    str.split('').each do |french_char|
+      blourg += BlorgChar.char_into_blourg(french_char).to_s + ' '
+    end
+    blourg[0..(blourg.length - 2)]
+  end
+
   def self.get_blourg_space_positions(str)
     space_positions = []
     words = str.split('  ')
