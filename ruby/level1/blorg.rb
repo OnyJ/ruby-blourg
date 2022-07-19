@@ -41,7 +41,7 @@ module BlorgValidation
     true
   end
 
-  def self.blourg_is_valid?(blourg_str)
+  def self.blourg_string_valid?(blourg_str)
     blourg_str = blourg_str.downcase
     return return_error(INVALID_BLOURG) unless translatable?(blourg_str)
     return return_error(INVALID_BLOURG) unless blourg_char_valid?(blourg_str)
@@ -132,7 +132,7 @@ class Blorg
 
   def self.decode(str)
     str = str.downcase
-    return INVALID_BLOURG unless BlorgValidation.blourg_is_valid?(str)
+    return INVALID_BLOURG unless BlorgValidation.blourg_string_valid?(str)
 
     french = string_into_french(str)
     french = insert_spaces_into_french(str, french)

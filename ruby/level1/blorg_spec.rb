@@ -128,16 +128,16 @@ describe '#translatable?' do
   end
 end
 
-describe '#blourg_is_valid?' do
+describe '#blourg_string_valid?' do
   it 'returns true if Blourg string is valid' do
-    expect(BlorgValidation.blourg_is_valid?('rgob rhol')).to be true
-    expect(BlorgValidation.blourg_is_valid?('  rhol ')).to be true
+    expect(BlorgValidation.blourg_string_valid?('rgob rhol')).to be true
+    expect(BlorgValidation.blourg_string_valid?('  rhol ')).to be true
   end
   it 'returns false if Blourg string is not valid' do
-    expect(BlorgValidation.blourg_is_valid?('ok rgob')).to be false
-    expect(BlorgValidation.blourg_is_valid?('ab cde')).to be false
-    expect(BlorgValidation.blourg_is_valid?('a')).to be false
-    expect(BlorgValidation.blourg_is_valid?('rgubrgub')).to be false
+    expect(BlorgValidation.blourg_string_valid?('ok rgob')).to be false
+    expect(BlorgValidation.blourg_string_valid?('ab cde')).to be false
+    expect(BlorgValidation.blourg_string_valid?('a')).to be false
+    expect(BlorgValidation.blourg_string_valid?('rgubrgub')).to be false
   end
 end
 
