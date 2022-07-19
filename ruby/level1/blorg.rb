@@ -57,8 +57,7 @@ module BlorgChar
   end
 
   def self.char_into_blourg(french_char)
-    equivalent = TRANSLATION_TABLE.select { |key, _value| french_char == key }
-    equivalent[french_char]
+    TRANSLATION_TABLE.select { |key, _value| french_char == key }.to_s[7..10]
   end
 end
 
