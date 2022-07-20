@@ -53,12 +53,20 @@ end
 module BlorgChar
   include BlorgValidation
 
-  def self.char_into_french(blourg_char)
+  def self.into_french(blourg_char)
+    return ' ' if blourg_char == ''
+
     TRANSLATION_TABLE.select { |_key, value| blourg_char == value }.to_s[2]
   end
 
   def self.char_into_blourg(french_char)
     TRANSLATION_TABLE.select { |key, _value| french_char == key }.to_s[7..10]
+  end
+
+  def self.fix_spaces(french, end_is_space)
+    french += ' ' if end_is_space
+    french = french[1...] if french[0..1] == '  '
+    french
   end
 end
 
@@ -70,20 +78,12 @@ class Blorg
     str = str.downcase
     return INVALID_BLOURG unless BlorgValidation.blourg_string_valid?(str)
 
-    french = ''
-    last = str.length - 1
-    ends_with_space = str[last] == ' ' && str[last - 1] == ' '
+    french       = ''
+    last         = str.length - 1
+    end_is_space = str[last] == ' ' && str[last - 1] == ' '
 
-    str.split(/ /).each do |blourg_char|
-      french += if blourg_char == ''
-                  ' '
-                else
-                  BlorgChar.char_into_french(blourg_char)
-                end
-    end
-    french += ' ' if ends_with_space
-    french = french[1...] if french[0..1] == '  '
-    french.downcase
+    str.split(/ /).each { |char| french += BlorgChar.into_french(char) }
+    BlorgChar.fix_spaces(french.downcase, end_is_space)
   end
 
   def self.encode(str)
@@ -93,16 +93,14 @@ class Blorg
     blourg = ''
     i = 0
     last = str.length - 1
-    ends_with_space = str[last] == ' '
+    end_is_space = str[last] == ' '
 
     str.split(//).each do |french_char|
       blourg += BlorgChar.char_into_blourg(french_char).to_s + ' '
-      if french_char == ' '
-        blourg += ' '
-      end
-      i+=1
+      blourg += ' ' if french_char == ' '
+      i += 1
     end
-    blourg += ' ' if ends_with_space
+    blourg += ' ' if end_is_space
     blourg.gsub!('   ', '  ')
     blourg[0..(blourg.length - 2)]
   end
