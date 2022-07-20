@@ -93,15 +93,11 @@ class Blorg
     str = str.upcase
     return INVALID_FRENCH unless BlorgValidation.translatable?(str)
 
-    blourg = ''
-    i = 0
-    last = str.length - 1
+    blourg       = ''
+    last         = str.length - 1
     end_is_space = str[last] == ' '
 
-    str.split(//).each do |french_char|
-      blourg += BlorgChar.char_into_blourg(french_char).to_s + ' '
-      i += 1
-    end
+    str.chars.each { |char| blourg += BlorgChar.char_into_blourg(char).to_s + ' ' }
     BlorgChar.fix_spaces(blourg, end_is_space)
     blourg[0..(blourg.length - 2)]
   end
