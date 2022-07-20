@@ -49,6 +49,23 @@ describe '#char_into_blourg' do
   end
 end
 
+describe '#fix_spaces' do
+  context 'blourg language' do
+    it 'rectifies missing and additionnal space characters' do
+      expect(BlorgChar.fix_spaces('blorb blorb', true)).to eq 'blorb blorb '
+      expect(BlorgChar.fix_spaces(' olgr olgr ', false)).to eq ' olgr olgr '
+      expect(BlorgChar.fix_spaces('  grlh grlh', false)).to eq ' grlh grlh'
+    end
+  end
+  context 'french language' do
+    it 'rectifies missing and additionnal space characters' do
+      expect(BlorgChar.fix_spaces('olala', true)).to eq 'olala '
+      expect(BlorgChar.fix_spaces('  tot ', false)).to eq ' tot '
+      expect(BlorgChar.fix_spaces('a b c ...', false)).to eq 'a b c ...'
+    end
+  end
+end
+
 describe '#char_exists?' do
   context 'french character verification' do
     it 'returns true if the TRANSLATION_TABLE contains the key' do
