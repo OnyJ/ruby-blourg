@@ -66,6 +66,7 @@ module BlorgChar
   def self.fix_spaces(sentence, end_is_space)
     sentence += ' ' if end_is_space
     sentence = sentence[1...] if sentence[0..1] == '  '
+    sentence.gsub!('   ', '  ') # sometimes blourg gets too many spaces
     sentence
   end
 end
@@ -100,8 +101,7 @@ class Blorg
       blourg += ' ' if french_char == ' '
       i += 1
     end
-    blourg += ' ' if end_is_space
-    blourg.gsub!('   ', '  ')
+    BlorgChar.fix_spaces(blourg, end_is_space)
     blourg[0..(blourg.length - 2)]
   end
 end
