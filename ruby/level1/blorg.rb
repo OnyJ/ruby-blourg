@@ -60,6 +60,8 @@ module BlorgChar
   end
 
   def self.char_into_blourg(french_char)
+    return ' ' if french_char == ' '
+
     TRANSLATION_TABLE.select { |key, _value| french_char == key }.to_s[7..10]
   end
 
@@ -98,7 +100,6 @@ class Blorg
 
     str.split(//).each do |french_char|
       blourg += BlorgChar.char_into_blourg(french_char).to_s + ' '
-      blourg += ' ' if french_char == ' '
       i += 1
     end
     BlorgChar.fix_spaces(blourg, end_is_space)
