@@ -53,15 +53,16 @@ describe '#fix_spaces' do
   context 'blourg language' do
     it 'rectifies missing and additionnal space characters' do
       expect(BlorgChar.fix_spaces('blorb blorb', true)).to eq 'blorb blorb '
-      expect(BlorgChar.fix_spaces(' olgr olgr ', false)).to eq ' olgr olgr '
+      expect(BlorgChar.fix_spaces(' olgr olgr '.dup, false)).to eq ' olgr olgr '
       expect(BlorgChar.fix_spaces('  grlh grlh', false)).to eq ' grlh grlh'
+      expect(BlorgChar.fix_spaces(' olgr   grlh'.dup, false)).to eq ' olgr  grlh'
     end
   end
   context 'french language' do
     it 'rectifies missing and additionnal space characters' do
       expect(BlorgChar.fix_spaces('olala', true)).to eq 'olala '
       expect(BlorgChar.fix_spaces('  tot ', false)).to eq ' tot '
-      expect(BlorgChar.fix_spaces('a b c ...', false)).to eq 'a b c ...'
+      expect(BlorgChar.fix_spaces('a b c ...'.dup, false)).to eq 'a b c ...'
     end
   end
 end
