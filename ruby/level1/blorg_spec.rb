@@ -31,12 +31,12 @@ describe '#decode' do
   end
 end
 
-describe '#char_into_french' do
+describe '#into_french' do
   it 'returns the French character matching the given Blourg character' do
-    expect(BlorgChar.char_into_french('rlgo')).to eq 'G'
-    expect(BlorgChar.char_into_french('glhu')).to eq 'N'
-    expect(BlorgChar.char_into_french('hrbo')).to eq 'U'
-    expect(BlorgChar.char_into_french('rblg')).to eq '!'
+    expect(BlorgChar.into_french('rlgo')).to eq 'G'
+    expect(BlorgChar.into_french('glhu')).to eq 'N'
+    expect(BlorgChar.into_french('hrbo')).to eq 'U'
+    expect(BlorgChar.into_french('rblg')).to eq '!'
   end
 end
 
