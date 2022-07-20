@@ -63,10 +63,10 @@ module BlorgChar
     TRANSLATION_TABLE.select { |key, _value| french_char == key }.to_s[7..10]
   end
 
-  def self.fix_spaces(french, end_is_space)
-    french += ' ' if end_is_space
-    french = french[1...] if french[0..1] == '  '
-    french
+  def self.fix_spaces(sentence, end_is_space)
+    sentence += ' ' if end_is_space
+    sentence = sentence[1...] if sentence[0..1] == '  '
+    sentence
   end
 end
 
